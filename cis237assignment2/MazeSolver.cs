@@ -20,7 +20,7 @@ namespace cis237assignment2
         char[,] maze;
         int xStart;
         int yStart;
-
+        bool mazeSolved = false;
         /// <summary>
         /// Default Constuctor to setup a new maze solver.
         /// </summary>
@@ -43,6 +43,9 @@ namespace cis237assignment2
             this.yStart = yStart;
 
             //Do work needed to use mazeTraversal recursive call and solve the maze.
+            mazeSolved = false;
+            mazeTraversal(xStart, yStart);
+            
         }
 
 
@@ -51,9 +54,70 @@ namespace cis237assignment2
         /// Feel free to change the return type if you like, or pass in parameters that you might need.
         /// This is only a very small starting point.
         /// </summary>
-        private void mazeTraversal()
+        public bool mazeTraversal(int xPos, int yPos)
         {
             //Implement maze traversal recursive call
+            //Make sure that index is still in range with try/catch
+            
+                int left = xPos - 1;
+                int right = xPos + 1;
+                int up = yPos - 1;
+                int down = yPos + 1;
+
+
+            //Base case
+            if (xPos == maze.GetLength(1)-1 || yPos == maze.GetLength(0)-1)
+            {
+                
+                Console.WriteLine(maze[yPos, xPos]);
+                return true;
+            }                
+
+                    //recursive call
+                    if (maze[xPos, down] == '.' && !mazeSolved)
+                    {
+                        mazeTraversal(xPos, down);
+                        if (!mazeSolved)
+                        {
+                            maze[xPos, down] = 'X';
+                            return true;
+                        }
+
+
+                    }
+
+                    if (maze[xPos, up] == '.' && !mazeSolved)
+                    {
+                        mazeTraversal(xPos, up);
+                        if (!mazeSolved)
+                        {
+                            maze[xPos, up] = 'X';
+                            return true;
+                        }
+                    }
+
+                    if (maze[yPos, left] == '.' && !mazeSolved)
+                    {
+                        mazeTraversal(yPos, left);
+                        if (!mazeSolved)
+                        {
+                            maze[yPos, left] = 'X';
+                            return true;
+                        }
+                    }
+
+                    if (maze[yPos, right] == '.' && !mazeSolved)
+                    {
+                        mazeTraversal(yPos, right);
+                        if (!mazeSolved)
+                        {
+                        maze[yPos, right] = 'X';
+                        return true;
+
+                        }
+                    }
+                
+                return false;           
         }
     }
 }

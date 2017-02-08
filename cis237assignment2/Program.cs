@@ -28,34 +28,36 @@ namespace cis237assignment2
             /// You don't have to, but it might make your life easier.
             /// </summary>
             char[,] maze1 = 
-            { { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
-            { '#', '.', '.', '.', '#', '.', '.', '.', '.', '.', '.', '#' },
-            { '#', '.', '#', '.', '#', '.', '#', '#', '#', '#', '.', '#' },
-            { '#', '#', '#', '.', '#', '.', '.', '.', '.', '#', '.', '#' },
-            { '#', '.', '.', '.', '.', '#', '#', '#', '.', '#', '.', '#' },
-            { '#', '#', '#', '#', '.', '#', '.', '#', '.', '#', '.', '#' },
-            { '#', '.', '.', '#', '.', '#', '.', '#', '.', '#', '.', '#' },
-            { '#', '#', '.', '#', '.', '#', '.', '#', '.', '#', '.', '#' },
-            { '#', '.', '.', '.', '.', '.', '.', '.', '.', '#', '.', '#' },
-            { '#', '#', '#', '#', '#', '#', '.', '#', '#', '#', '.', '.' },
-            { '#', '.', '.', '.', '.', '.', '.', '#', '.', '.', '.', '#' },
-            { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' } };
+           { { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
+             { '#', '.', '.', '.', '#', '.', '.', '.', '.', '.', '.', '#' },
+             { '#', '.', '#', '.', '#', '.', '#', '#', '#', '#', '.', '#' },
+             { '#', '#', '#', '.', '#', '.', '.', '.', '.', '#', '.', '#' },
+             { '#', '.', '.', '.', '.', '#', '#', '#', '.', '#', '.', '#' },
+             { '#', '#', '#', '#', '.', '#', '.', '#', '.', '#', '.', '#' },
+             { '#', '.', '.', '#', '.', '#', '.', '#', '.', '#', '.', '#' },
+             { '#', '#', '.', '#', '.', '#', '.', '#', '.', '#', '.', '#' },
+             { '#', '.', '.', '.', '.', '.', '.', '.', '.', '#', '.', '#' },
+             { '#', '#', '#', '#', '#', '#', '.', '#', '#', '#', '.', '.' },
+             { '#', '.', '.', '.', '.', '.', '.', '#', '.', '.', '.', '#' },
+             { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' } };
 
             /// <summary>
             /// Create a new instance of a mazeSolver.
             /// </summary>
             MazeSolver mazeSolver = new MazeSolver();
 
+            
             //Create the second maze by transposing the first maze
             char[,] maze2 = transposeMaze(maze1);
 
+            
             /// <summary>
             /// Tell the instance to solve the first maze with the passed maze, and start coordinates.
             /// </summary>
             mazeSolver.SolveMaze(maze1, X_START, Y_START);
 
             //Solve the transposed maze.
-            mazeSolver.SolveMaze(maze2, X_START, Y_START);
+            //mazeSolver.SolveMaze(maze2, X_START, Y_START);
 
         }
 
@@ -78,7 +80,30 @@ namespace cis237assignment2
         static char[,] transposeMaze(char[,] mazeToTranspose)
         {
             //Write code her to create a transposed maze.
-            return new char[1, 1];
+            char[,] transposeMaze = new char[mazeToTranspose.GetLength(0), mazeToTranspose.GetLength(1)];
+            for (int y = 0; y < mazeToTranspose.GetLength(0); y++)
+            {
+                for (int x = 0; x < mazeToTranspose.GetLength(1); x++)
+                {
+                    transposeMaze [y, x] = mazeToTranspose[y, x];
+                }
+                
+            }
+            return mazeToTranspose;
+        }
+
+
+        //Writes out the transposed maze
+        static void newMaze(char[,] secondMaze)
+        {
+            for (int y = 0; y < secondMaze.GetLength(0); y++)
+            {
+                for (int x = 0; x < secondMaze.GetLength(1); x++)
+                {
+                    Console.Write(secondMaze[y, x]);
+                }
+                Console.WriteLine();
+            }
         }
     }
 }
